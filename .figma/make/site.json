@@ -1,0 +1,10 @@
+{
+  "description": "Discover and book curated local tours in Australia, verified by experienced travelers, for a personalized and trustworthy travel experience.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
