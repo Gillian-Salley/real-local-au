@@ -1,6 +1,13 @@
 import { Link } from 'react-router'
 import TourCard from '../components/TourCard'
 import { FEATURED_TOURS } from '../data/tours'
+import SEOMeta from '../components/SEOMeta'
+import { SITE_NAME } from '../lib/seo'
+
+export const metadata = {
+  title: `호주 로컬 투어 예약 | 5년 이상 거주 가이드 매칭 서비스`,
+  description: `호주 유학·워홀·거주 5년 이상 가이드가 직접 큐레이션한 로컬 투어 예약 매칭 서비스. ${SITE_NAME}에서 진짜 호주를 경험하세요.`,
+}
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -29,6 +36,7 @@ const HOW_IT_WORKS = [
 export default function HomePage() {
   return (
     <>
+      <SEOMeta {...metadata} />
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="relative h-[80vh] min-h-[560px] max-h-[900px] flex flex-col overflow-hidden">
         <div className="absolute inset-0 bg-[#0f1e35]">
@@ -132,8 +140,8 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-14">
             <div>
               <p className="text-[#C4603A] text-sm font-medium tracking-widest uppercase mb-3">Best of AusRealTour</p>
-              <h2 className="text-[#1B2D4F] text-3xl md:text-4xl lg:text-5xl font-light leading-tight" style={{ fontFamily: 'Fraunces, Georgia, serif' }}>
-                지금 가장 인기 있는<br className="hidden sm:block" /> 투어
+              <h2 className="text-[#1B2D4F] text-3xl md:text-4xl lg:text-5xl font-light leading-tight whitespace-nowrap" style={{ fontFamily: 'Fraunces, Georgia, serif' }}>
+                지금 가장 인기 있는 투어
               </h2>
             </div>
             <Link

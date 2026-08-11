@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Outlet, Link, useLocation } from 'react-router'
 import AiChatModal from './AiChatModal'
+import kangarooIcon from '../imports/openmoji_kangaroo.svg'
 
 const NAV_LINKS = [
   { label: '투어 목록', href: '/tours' },
   { label: '나의 스토리', href: '/about' },
-  { label: '예약 확인', href: '/#booking' },
+  { label: '예약 확인', href: '/bookings' },
 ]
 
 export default function Layout() {
@@ -45,9 +46,7 @@ export default function Layout() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-2 group">
-              <div className="w-8 h-8 bg-[#1B2D4F] rounded-sm flex items-center justify-center">
-                <span className="text-[#C4603A] font-bold text-sm" style={{ fontFamily: 'Fraunces, Georgia, serif' }}>A</span>
-              </div>
+              <img src={kangarooIcon} alt="캥거루 아이콘" className="w-8 h-8" />
               <span className={`font-semibold tracking-tight transition-colors duration-300 ${logoColor}`} style={{ fontFamily: 'Fraunces, Georgia, serif' }}>
                 AusReal<span className="text-[#C4603A]">Tour</span>
               </span>
@@ -111,9 +110,7 @@ export default function Layout() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
             <div className="md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-7 h-7 bg-white/10 rounded-sm flex items-center justify-center">
-                  <span className="text-[#C4603A] font-bold text-xs" style={{ fontFamily: 'Fraunces, Georgia, serif' }}>A</span>
-                </div>
+                <img src={kangarooIcon} alt="캥거루 아이콘" className="w-7 h-7" />
                 <span className="font-semibold text-white text-sm" style={{ fontFamily: 'Fraunces, Georgia, serif' }}>
                   AusReal<span className="text-[#C4603A]">Tour</span>
                 </span>

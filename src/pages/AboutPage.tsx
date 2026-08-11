@@ -1,5 +1,12 @@
 import { useEffect, useRef, type ReactNode } from 'react'
 import { Link } from 'react-router'
+import SEOMeta from '../components/SEOMeta'
+import { SITE_NAME } from '../lib/seo'
+
+export const metadata = {
+  title: `왜 저희를 믿고 예약하셔도 될까요 | ${SITE_NAME}`,
+  description: `워킹홀리데이·유학·현지 정착까지, 호주에서 5년 이상 살아온 사람들이 만든 투어 플랫폼 ${SITE_NAME}의 이야기를 소개합니다.`,
+}
 
 const TIMELINE = [
   {
@@ -100,6 +107,7 @@ function FadeIn({ children, delay = 0 }: { children: ReactNode; delay?: number }
 export default function AboutPage() {
   return (
     <div className="pt-16 min-h-screen bg-[#FDFAF6]">
+      <SEOMeta {...metadata} />
 
       {/* ── Page header ──────────────────────────────────────────────── */}
       <div className="bg-[#1B2D4F] pt-14 pb-16 px-4 sm:px-6 lg:px-8">

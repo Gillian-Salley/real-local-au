@@ -1,6 +1,13 @@
 import { useState } from 'react'
 import TourCard from '../components/TourCard'
 import { ALL_TOURS } from '../data/tours'
+import SEOMeta from '../components/SEOMeta'
+import { SITE_NAME } from '../lib/seo'
+
+export const metadata = {
+  title: `전체 투어 둘러보기 | ${SITE_NAME}`,
+  description: `호주 시드니·멜번·골드코스트·브리즈번·울루루 등 지역별, 테마별 로컬 투어를 한눈에. ${SITE_NAME}의 검증된 가이드가 안내합니다.`,
+}
 
 const REGIONS = ['전체', '시드니', '멜번', '골드코스트', '브리즈번']
 const THEMES = ['전체', '워홀러코스', '신혼여행코스', '가족여행코스']
@@ -17,6 +24,7 @@ export default function ToursPage() {
 
   return (
     <div className="pt-16 min-h-screen bg-[#FDFAF6]">
+      <SEOMeta {...metadata} />
       {/* ── Page header ───────────────────────────────────────────────── */}
       <div className="bg-[#1B2D4F] pt-14 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">

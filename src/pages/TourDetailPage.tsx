@@ -1,6 +1,8 @@
 import { useState, type FormEvent } from 'react'
 import { useParams, Link } from 'react-router'
 import { ALL_TOURS } from '../data/tours'
+import SEOMeta from '../components/SEOMeta'
+import { SITE_NAME } from '../lib/seo'
 
 function StarFill({ filled }: { filled: boolean }) {
   return (
@@ -39,6 +41,12 @@ export default function TourDetailPage() {
 
   return (
     <div className="pt-16 min-h-screen bg-[#FDFAF6]">
+      <SEOMeta
+        title={`${tour.title} | ${SITE_NAME}`}
+        description={`${tour.region} · ${tour.duration} · ${tour.guideRole} 가이드. ${tour.description}`}
+        ogImage={tour.images[0]}
+        ogType="article"
+      />
       {/* ── Breadcrumb ────────────────────────────────────────────────── */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
         <nav className="flex items-center gap-2 text-xs text-[#1B2D4F]/45">
