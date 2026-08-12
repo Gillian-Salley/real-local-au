@@ -142,9 +142,10 @@ export default function Layout() {
             <div>
               <p className="text-white/80 text-xs font-semibold uppercase tracking-widest mb-4">서비스</p>
               <ul className="space-y-2.5">
-                {['투어 목록', '가이드 등록', '기업 투어', '자주 묻는 질문'].map((item) => (
-                  <li key={item}><a href="#" className="text-xs hover:text-white/80 transition-colors duration-200">{item}</a></li>
-                ))}
+                <li><Link to="/tours" className="text-xs hover:text-white/80 transition-colors duration-200">투어 목록</Link></li>
+                <li><Link to="/guide-apply" className="text-xs hover:text-white/80 transition-colors duration-200">가이드 지원</Link></li>
+                <li><a href="#" className="text-xs hover:text-white/80 transition-colors duration-200">기업 투어</a></li>
+                <li><a href="#" className="text-xs hover:text-white/80 transition-colors duration-200">자주 묻는 질문</a></li>
               </ul>
             </div>
             <div>

@@ -20,6 +20,8 @@ type Booking = {
   status: BookingStatus
   appliedAt: string
   priceKRW: number
+  email: string
+  phone: string
 }
 
 const MOCK_BOOKINGS: Booking[] = [
@@ -33,6 +35,8 @@ const MOCK_BOOKINGS: Booking[] = [
     status: '확정',
     appliedAt: '2026-08-05',
     priceKRW: 89000,
+    email: 'kim@example.com',
+    phone: '010-1234-5678',
   },
   {
     id: 'ART-2026-0792',
@@ -44,6 +48,8 @@ const MOCK_BOOKINGS: Booking[] = [
     status: '대기중',
     appliedAt: '2026-08-09',
     priceKRW: 210000,
+    email: 'lee@example.com',
+    phone: '010-2345-6789',
   },
   {
     id: 'ART-2026-0755',
@@ -55,6 +61,8 @@ const MOCK_BOOKINGS: Booking[] = [
     status: '확정',
     appliedAt: '2026-07-28',
     priceKRW: 178000,
+    email: 'park@example.com',
+    phone: '010-3456-7890',
   },
   {
     id: 'ART-2026-0701',
@@ -66,6 +74,8 @@ const MOCK_BOOKINGS: Booking[] = [
     status: '취소됨',
     appliedAt: '2026-07-15',
     priceKRW: 65000,
+    email: 'choi@example.com',
+    phone: '010-4567-8901',
   },
 ]
 
@@ -86,10 +96,16 @@ export default function BookingsPage() {
   const [cancelTarget, setCancelTarget] = useState<Booking | null>(null)
   const [cancelDone, setCancelDone] = useState<Set<string>>(new Set())
 
-  // TODO: 실제 API 연동 시 /api/bookings?email=...&phone=... 으로 GET 요청 예정
+  // TODO: 실제 API 연동 시 /api/bookings?q=... 으로 GET 요청 예정
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setBookings(MOCK_BOOKINGS)
+    const q = (new FormData(e.currentTarget).get('contact') as string).trim().toLowerCase()
+    const filtered = MOCK_BOOKINGS.filter((b) =>
+      b.id.toLowerCase().includes(q) ||
+      b.email.toLowerCase().includes(q) ||
+      b.phone.replace(/-/g, '').includes(q.replace(/-/g, ''))
+    )
+    setBookings(filtered)
     setSearched(true)
   }
 

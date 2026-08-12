@@ -247,12 +247,12 @@ export default function HomePage() {
               >
                 투어 둘러보기
               </Link>
-              <a
-                href="#story"
+              <Link
+                to="/about"
                 className="w-full sm:w-auto bg-transparent hover:bg-white/10 active:scale-95 border border-white/40 hover:border-white/60 text-white font-medium px-8 py-4 rounded-full transition-all duration-200 text-center text-sm"
               >
                 나의 스토리 보기
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -375,6 +375,61 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 가이드 모집 CTA ───────────────────────────────────────────── */}
+      <section className="py-14 md:py-20 px-4 sm:px-6 lg:px-8 bg-[#F5EFE6]">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative bg-[#1B2D4F] rounded-3xl overflow-hidden px-8 md:px-14 py-12 md:py-14 flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
+            {/* Decorative background element */}
+            <div className="absolute right-0 top-0 w-64 h-64 rounded-full bg-[#C4603A]/10 -translate-y-1/3 translate-x-1/3 pointer-events-none" />
+            <div className="absolute right-16 bottom-0 w-40 h-40 rounded-full bg-white/4 translate-y-1/3 pointer-events-none" />
+
+            {/* Text */}
+            <div className="relative text-center md:text-left max-w-xl">
+              <p className="text-[#C4603A] text-xs font-semibold tracking-widest uppercase mb-4">Become a Guide</p>
+              <h2
+                className="text-white text-2xl md:text-3xl lg:text-4xl font-light leading-snug mb-4"
+                style={{ fontFamily: 'Fraunces, Georgia, serif' }}
+              >
+                AusRealTour의<br />
+                <em className="not-italic text-[#E8845C]">가이드</em>가 되어보세요
+              </h2>
+              <p className="text-white/55 text-sm leading-relaxed">
+                호주에서 살아온 경험이 누군가의 특별한 여행이 됩니다.<br className="hidden sm:block" />
+                5년 이상 거주 경험자라면 지금 바로 지원해보세요.
+              </p>
+
+              {/* Benefits */}
+              <ul className="mt-6 space-y-2 text-left inline-block">
+                {[
+                  '원하는 일정에만 투어 진행 (부업 가능)',
+                  '투어 수익의 85% 직접 수령',
+                  '마케팅·예약 관리는 AusRealTour가 담당',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-white/60 text-xs">
+                    <span className="text-[#C4603A] mt-0.5 shrink-0">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* CTA button */}
+            <div className="relative shrink-0 flex flex-col items-center gap-3">
+              <a
+                href="/guide-apply"
+                className="inline-flex items-center gap-2.5 bg-[#C4603A] hover:bg-[#D97A56] active:scale-95 text-white font-semibold px-8 py-4 rounded-full transition-all duration-200 text-sm tracking-wide shadow-lg shadow-[#C4603A]/30 whitespace-nowrap"
+              >
+                지원 신청하기
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <p className="text-white/30 text-[10px] text-center">현재 {' '}<span className="text-white/50 font-medium">28명</span>의 가이드가 활동 중</p>
+            </div>
           </div>
         </div>
       </section>

@@ -5,6 +5,7 @@ import ToursPage from './pages/ToursPage'
 import TourDetailPage from './pages/TourDetailPage'
 import AboutPage from './pages/AboutPage'
 import BookingsPage from './pages/BookingsPage'
+import GuideApplyPage from './pages/GuideApplyPage'
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
       { path: 'tour/:id', Component: TourDetailPage },
       { path: 'about', Component: AboutPage },
       { path: 'bookings', Component: BookingsPage },
+      { path: 'guide-apply', Component: GuideApplyPage },
     ],
   },
 ])
