@@ -93,7 +93,7 @@ export default function AiChatModal({ open, onClose }: Props) {
             : 'opacity-0 translate-y-6 pointer-events-none'
           }
         `}
-        style={{ fontFamily: 'Outfit, system-ui, sans-serif' }}
+        style={{ fontFamily: 'Pretendard, system-ui, sans-serif' }}
       >
         {/* Header */}
         <div className="bg-[#1B2D4F] px-5 py-4 flex items-center gap-3 shrink-0">

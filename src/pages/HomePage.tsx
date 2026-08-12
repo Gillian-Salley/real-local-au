@@ -1,12 +1,181 @@
+import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router'
 import TourCard from '../components/TourCard'
-import { FEATURED_TOURS } from '../data/tours'
+import { FEATURED_TOURS, ALL_TOURS } from '../data/tours'
 import SEOMeta from '../components/SEOMeta'
 import { SITE_NAME } from '../lib/seo'
 
 export const metadata = {
   title: `호주 로컬 투어 예약 | 5년 이상 거주 가이드 매칭 서비스`,
   description: `호주 유학·워홀·거주 5년 이상 가이드가 직접 큐레이션한 로컬 투어 예약 매칭 서비스. ${SITE_NAME}에서 진짜 호주를 경험하세요.`,
+}
+
+function ConsultForm() {
+  const [privacyChecked, setPrivacyChecked] = useState(false)
+  const [marketingChecked, setMarketingChecked] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+
+  // TODO: 실제 API 연동 시 /api/consult 엔드포인트로 POST 요청 처리 예정
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const data = Object.fromEntries(new FormData(e.currentTarget))
+    console.log('[상담 신청 데이터]', data)
+    setSubmitted(true)
+  }
+
+  const inputCls = 'w-full bg-white/8 border border-white/15 rounded-xl px-4 py-3.5 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/35 focus:bg-white/12 transition-all duration-200'
+
+  return (
+    <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#1B2D4F]">
+      <div className="max-w-3xl mx-auto">
+        {/* Header */}
+        <div className="mb-10 md:mb-12">
+          <p className="text-[#C4603A] text-sm font-medium tracking-widest uppercase mb-4">Consult</p>
+          <h2
+            className="text-white text-3xl md:text-4xl lg:text-5xl font-light leading-tight mb-4"
+            style={{ fontFamily: 'Fraunces, Georgia, serif' }}
+          >
+            투어가 고민되신다면<br />
+            <em className="not-italic text-[#D97A56]">상담부터 시작하세요</em>
+          </h2>
+          <p className="text-white/50 text-sm md:text-base leading-relaxed">
+            가이드가 직접 연락드려 일정과 취향에 맞는 투어를 안내해드립니다.
+          </p>
+        </div>
+
+        {submitted ? (
+          <div className="bg-white/8 border border-white/12 rounded-2xl p-8 md:p-10 text-center">
+            <div className="w-14 h-14 rounded-full bg-[#C4603A]/20 flex items-center justify-center mx-auto mb-5">
+              <svg className="w-7 h-7 text-[#C4603A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+            </div>
+            <h3 className="text-white font-semibold text-lg mb-2" style={{ fontFamily: 'Fraunces, Georgia, serif' }}>
+              상담 신청이 완료됐어요!
+            </h3>
+            <p className="text-white/55 text-sm leading-relaxed">
+              담당 가이드가 영업일 기준 1일 이내로 연락드릴 예정이에요.
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="bg-white/6 border border-white/10 rounded-2xl p-6 md:p-8 space-y-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {/* 이름 */}
+              <div>
+                <label className="block text-white/70 text-xs font-medium mb-2">
+                  이름 <span className="text-[#C4603A]">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  placeholder="홍길동"
+                  className={inputCls}
+                />
+              </div>
+
+              {/* 전화번호 */}
+              <div>
+                <label className="block text-white/70 text-xs font-medium mb-2">
+                  전화번호 <span className="text-[#C4603A]">*</span>
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  placeholder="010-0000-0000"
+                  className={inputCls}
+                />
+              </div>
+            </div>
+
+            {/* 투어 선택 */}
+            <div>
+              <label className="block text-white/70 text-xs font-medium mb-2">
+                생각하고 있는 투어
+              </label>
+              <div className="relative">
+                <select
+                  name="tour"
+                  defaultValue=""
+                  className="w-full bg-white/8 border border-white/15 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-white/35 focus:bg-white/12 transition-all duration-200 appearance-none pr-10 [&>option]:bg-[#1B2D4F] [&>option]:text-white"
+                >
+                  <option value="" disabled className="text-white/40">
+                    투어를 선택해주세요 (선택)
+                  </option>
+                  <option value="아직 미정">아직 미정 / 추천 받고 싶어요</option>
+                  {ALL_TOURS.map((t) => (
+                    <option key={t.id} value={t.title}>
+                      [{t.region}] {t.title}
+                    </option>
+                  ))}
+                </select>
+                <svg
+                  className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40"
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+              </div>
+            </div>
+
+            {/* 동의 항목 */}
+            <div className="space-y-3 pt-1">
+              {/* 개인정보 수집 동의 (필수) */}
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  name="privacyAgreed"
+                  checked={privacyChecked}
+                  onChange={(e) => setPrivacyChecked(e.target.checked)}
+                  required
+                  className="mt-0.5 w-4 h-4 accent-[#C4603A] shrink-0 cursor-pointer"
+                />
+                <span className="text-xs leading-relaxed text-white/55 group-hover:text-white/70 transition-colors">
+                  <span className="text-white/85 font-medium">[필수] 개인정보 수집 및 이용에 동의합니다.</span>
+                  <br />
+                  <span className="text-white/35">
+                    수집 항목: 이름, 전화번호 / 목적: 투어 상담 연락 / 보유 기간: 상담 완료 후 6개월
+                  </span>
+                </span>
+              </label>
+
+              {/* 마케팅 문자 수신 동의 (선택) */}
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  name="marketingAgreed"
+                  checked={marketingChecked}
+                  onChange={(e) => setMarketingChecked(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 accent-[#C4603A] shrink-0 cursor-pointer"
+                />
+                <span className="text-xs leading-relaxed text-white/55 group-hover:text-white/70 transition-colors">
+                  <span className="text-white/85 font-medium">[선택] 마케팅 문자 수신에 동의합니다.</span>
+                  <br />
+                  <span className="text-white/35">
+                    신규 투어 오픈, 할인 이벤트 등 유용한 정보를 문자로 받아보실 수 있어요.
+                  </span>
+                </span>
+              </label>
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={!privacyChecked}
+              className="w-full bg-[#C4603A] hover:bg-[#D97A56] disabled:bg-white/10 disabled:text-white/25 disabled:cursor-not-allowed text-white font-medium py-4 rounded-xl transition-all duration-200 text-sm tracking-wide mt-2"
+            >
+              상담 예약하기
+            </button>
+
+            <p className="text-white/25 text-[10px] text-center">
+              담당 가이드가 영업일 기준 1일 이내로 연락드립니다
+            </p>
+          </form>
+        )}
+      </div>
+    </section>
+  )
 }
 
 function StarRating({ rating }: { rating: number }) {
@@ -63,7 +232,7 @@ export default function HomePage() {
               style={{ fontFamily: 'Fraunces, Georgia, serif' }}
             >
               직접 살아본 사람만<br />
-              아는 <em className="not-italic text-[#D97A56]">호주 여행</em>
+              아는 <em className="not-italic text-[#E8845C]" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4)' }}>호주 여행</em>
             </h1>
 
             <p className="text-white/70 text-center md:text-left text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-md mx-auto md:mx-0">
@@ -210,24 +379,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────── */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#1B2D4F]">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-[#C4603A] text-sm font-medium tracking-widest uppercase mb-4">AI 투어 상담</p>
-          <h2 className="text-white text-3xl md:text-5xl font-light leading-tight mb-6" style={{ fontFamily: 'Fraunces, Georgia, serif' }}>
-            어떤 투어가 나에게<br /><em className="not-italic text-[#D97A56]">맞을까요?</em>
-          </h2>
-          <p className="text-white/60 text-base md:text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-            AI 상담사에게 여행 일정과 취향을 알려주세요. 10초 만에 딱 맞는 투어를 추천해드립니다.
-          </p>
-          <a href="#" className="inline-flex items-center gap-3 bg-[#C4603A] hover:bg-[#D97A56] text-white font-medium px-8 py-4 rounded-full transition-colors duration-200 text-sm">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
-            </svg>
-            AI 상담 시작하기
-          </a>
-        </div>
-      </section>
+      {/* ── 상담 신청 폼 ─────────────────────────────────────────────── */}
+      <ConsultForm />
     </>
   )
 }
