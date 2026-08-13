@@ -57,14 +57,14 @@ export default function Layout() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className={`text-sm font-medium transition-colors duration-200 ${linkColor}`}
+                  className={`text-base font-medium transition-colors duration-200 ${linkColor}`}
                 >
                   {link.label}
                 </Link>
               ))}
               <Link
                 to="/tours"
-                className={`text-sm font-medium px-5 py-2.5 rounded-full transition-colors duration-200 ${ctaBg}`}
+                className={`text-base font-medium px-6 py-2.5 rounded-full transition-colors duration-200 ${ctaBg}`}
               >
                 투어 찾기
               </Link>
@@ -87,13 +87,13 @@ export default function Layout() {
         {menuOpen && (
           <div className="md:hidden bg-[#FDFAF6] border-t border-[#1B2D4F]/10 px-4 py-4 flex flex-col gap-3">
             {NAV_LINKS.map((link) => (
-              <Link key={link.label} to={link.href} className="text-[#1B2D4F] font-medium py-1">
+              <Link key={link.label} to={link.href} className="text-[#1B2D4F] text-base font-medium py-1">
                 {link.label}
               </Link>
             ))}
             <Link
               to="/tours"
-              className="bg-[#1B2D4F] text-white text-sm font-medium px-5 py-3 rounded-full text-center mt-1"
+              className="bg-[#1B2D4F] text-white text-base font-medium px-5 py-3 rounded-full text-center mt-1"
             >
               투어 찾기
             </Link>
@@ -111,11 +111,11 @@ export default function Layout() {
             <div className="md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
                 <img src={kangarooIcon} alt="캥거루 아이콘" className="w-7 h-7" />
-                <span className="font-semibold text-white text-sm" style={{ fontFamily: 'Fraunces, Georgia, serif' }}>
+                <span className="font-semibold text-white text-base" style={{ fontFamily: 'Fraunces, Georgia, serif' }}>
                   AusReal<span className="text-[#C4603A]">Tour</span>
                 </span>
               </div>
-              <p className="text-white/40 text-xs whitespace-nowrap">
+              <p className="text-white/40 text-sm whitespace-nowrap">
                 호주 유학·워홀·거주 경험자가 직접 검증한 로컬 투어 예약 매칭 플랫폼
               </p>
               <div className="flex gap-3 mt-5">
@@ -140,29 +140,29 @@ export default function Layout() {
               </div>
             </div>
             <div>
-              <p className="text-white/80 text-xs font-semibold uppercase tracking-widest mb-4">서비스</p>
-              <ul className="space-y-2.5">
-                <li><Link to="/tours" className="text-xs hover:text-white/80 transition-colors duration-200">투어 목록</Link></li>
-                <li><Link to="/guide-apply" className="text-xs hover:text-white/80 transition-colors duration-200">가이드 지원</Link></li>
-                <li><a href="#" className="text-xs hover:text-white/80 transition-colors duration-200">기업 투어</a></li>
-                <li><a href="#" className="text-xs hover:text-white/80 transition-colors duration-200">자주 묻는 질문</a></li>
+              <p className="text-white/80 text-sm font-semibold uppercase tracking-widest mb-4">서비스</p>
+              <ul className="space-y-3">
+                <li><Link to="/tours" className="text-sm hover:text-white/80 transition-colors duration-200">투어 목록</Link></li>
+                <li><Link to="/guide-apply" className="text-sm hover:text-white/80 transition-colors duration-200">가이드 지원</Link></li>
+                <li><a href="#" className="text-sm hover:text-white/80 transition-colors duration-200">기업 투어</a></li>
+                <li><a href="#" className="text-sm hover:text-white/80 transition-colors duration-200">자주 묻는 질문</a></li>
               </ul>
             </div>
             <div>
-              <p className="text-white/80 text-xs font-semibold uppercase tracking-widest mb-4">고객지원</p>
-              <ul className="space-y-2.5">
+              <p className="text-white/80 text-sm font-semibold uppercase tracking-widest mb-4">고객지원</p>
+              <ul className="space-y-3">
                 {['예약 확인', '환불 정책', '이용약관', '개인정보처리방침'].map((item) => (
-                  <li key={item}><a href="#" className="text-xs hover:text-white/80 transition-colors duration-200">{item}</a></li>
+                  <li key={item}><a href="#" className="text-sm hover:text-white/80 transition-colors duration-200">{item}</a></li>
                 ))}
               </ul>
             </div>
           </div>
           <div className="border-t border-white/8 pt-6 flex flex-col sm:flex-row justify-between gap-3">
-            <p className="text-[10px] text-white/30 leading-relaxed">
+            <p className="text-xs text-white/30 leading-relaxed">
               상호: 오스리얼투어(주) · 대표: 홍길동 · 사업자등록번호: 000-00-00000<br />
               통신판매업신고: 제2024-서울강남-0000호 · 관광사업등록: 제2024-000호
             </p>
-            <p className="text-[10px] text-white/25">© 2026 AusRealTour. All rights reserved.</p>
+            <p className="text-xs text-white/25">© 2026 AusRealTour. All rights reserved.</p>
           </div>
         </div>
       </footer>

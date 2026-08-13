@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useState, useEffect, useRef, type FormEvent } from 'react'
 import { Link } from 'react-router'
 import TourCard from '../components/TourCard'
 import { FEATURED_TOURS, ALL_TOURS } from '../data/tours'
@@ -8,6 +8,141 @@ import { SITE_NAME } from '../lib/seo'
 export const metadata = {
   title: `호주 로컬 투어 예약 | 5년 이상 거주 가이드 매칭 서비스`,
   description: `호주 유학·워홀·거주 5년 이상 가이드가 직접 큐레이션한 로컬 투어 예약 매칭 서비스. ${SITE_NAME}에서 진짜 호주를 경험하세요.`,
+}
+
+const HERO_SLIDES = [
+  {
+    src: 'https://images.unsplash.com/photo-1774257784483-f3fc96d42730?w=1800&h=1200&fit=crop&auto=format&q=85',
+    state: '노던 테리토리',
+    spot: '울루루',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1515482758760-9535c2f0a18c?w=1800&h=1200&fit=crop&auto=format&q=85',
+    state: '뉴사우스웨일스',
+    spot: '시드니',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1610183880843-52fc754207a8?w=1800&h=1200&fit=crop&auto=format&q=85',
+    state: '빅토리아',
+    spot: '멜번',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1760256454373-1557a5a7b2e8?w=1800&h=1200&fit=crop&auto=format&q=85',
+    state: '퀸즐랜드',
+    spot: '그레이트 배리어 리프',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1559330280-64b674f081f1?w=1800&h=1200&fit=crop&auto=format&q=85',
+    state: '웨스턴 오스트레일리아',
+    spot: '퍼스',
+  },
+]
+
+const FADE_DURATION = 1400   // ms — crossfade length
+const SLIDE_INTERVAL = 5800  // ms — time each slide is fully visible
+
+function HeroSlideshow() {
+  const [cur, setCur] = useState(0)
+  const [prev, setPrev] = useState<number | null>(null)
+  const lockRef = useRef(false)
+
+  const goTo = (idx: number) => {
+    if (lockRef.current) return
+    lockRef.current = true
+    setPrev(idx === 0 ? HERO_SLIDES.length - 1 : idx - 1)
+    setCur(idx)
+    setTimeout(() => {
+      setPrev(null)
+      lockRef.current = false
+    }, FADE_DURATION)
+  }
+
+  const goToManual = (idx: number) => {
+    if (lockRef.current || idx === cur) return
+    lockRef.current = true
+    setPrev(cur)
+    setCur(idx)
+    setTimeout(() => {
+      setPrev(null)
+      lockRef.current = false
+    }, FADE_DURATION)
+  }
+
+  useEffect(() => {
+    const iv = setInterval(() => {
+      setCur((c) => {
+        const next = (c + 1) % HERO_SLIDES.length
+        setPrev(c)
+        setTimeout(() => setPrev(null), FADE_DURATION)
+        return next
+      })
+    }, SLIDE_INTERVAL)
+    return () => clearInterval(iv)
+  }, [])
+
+  return (
+    <div className="absolute inset-0">
+      {/* Always-on dark base so there's never a flash */}
+      <div className="absolute inset-0 bg-[#0a1520]" />
+
+      {/* Previous slide — fades out */}
+      {prev !== null && (
+        <img
+          key={`p${prev}`}
+          src={HERO_SLIDES[prev].src}
+          alt={HERO_SLIDES[prev].spot}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: 0, transition: `opacity ${FADE_DURATION}ms ease-in-out` }}
+        />
+      )}
+
+      {/* Current slide — fades in */}
+      <img
+        key={`c${cur}`}
+        src={HERO_SLIDES[cur].src}
+        alt={HERO_SLIDES[cur].spot}
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{
+          animation: `heroFadeIn ${FADE_DURATION}ms ease-in-out forwards`,
+        }}
+      />
+
+      {/* Dim overlay for text legibility */}
+      <div className="absolute inset-0 bg-[#0a1520]/55" />
+      {/* Bottom gradient for extra readability */}
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#0a1520]/70 to-transparent" />
+
+      {/* Slide indicators + location label */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
+        <div className="flex items-center gap-2">
+          {HERO_SLIDES.map((s, i) => (
+            <button
+              key={i}
+              onClick={() => goToManual(i)}
+              aria-label={s.spot}
+              className="flex items-center"
+            >
+              <div
+                className="h-[3px] rounded-full transition-all duration-500"
+                style={{
+                  width: i === cur ? 28 : 8,
+                  backgroundColor: i === cur ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.3)',
+                }}
+              />
+            </button>
+          ))}
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span
+            className="text-white/60 text-[10px] tracking-[0.2em] uppercase transition-all duration-700"
+            key={cur}
+          >
+            {HERO_SLIDES[cur].state} · {HERO_SLIDES[cur].spot}
+          </span>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 function ConsultForm() {
@@ -208,15 +343,7 @@ export default function HomePage() {
       <SEOMeta {...metadata} />
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="relative h-[80vh] min-h-[560px] max-h-[900px] flex flex-col overflow-hidden">
-        <div className="absolute inset-0 bg-[#0f1e35]">
-          <img
-            src="https://images.unsplash.com/photo-1529108190281-9a4f620bc2d8?w=1800&h=1200&fit=crop&auto=format"
-            alt="호주 울루루 붉은 대지와 하늘"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-[#0a1520]/40" />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a1520]/60 to-transparent" />
-        </div>
+        <HeroSlideshow />
 
         <div className="relative z-10 flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-8 pt-16">
           <div className="max-w-6xl mx-auto w-full">
@@ -257,17 +384,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="relative z-10 flex flex-col items-center pb-6 gap-1.5">
-          <span className="text-white/35 text-[10px] tracking-widest uppercase">Scroll</span>
-          <div className="flex flex-col items-center gap-0.5 animate-bounce" style={{ animationDuration: '1.6s' }}>
-            <svg className="w-5 h-5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-            <svg className="w-5 h-5 text-white/20 -mt-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
-        </div>
       </section>
 
       {/* ── Why AusRealTour ───────────────────────────────────────────── */}
@@ -279,24 +395,43 @@ export default function HomePage() {
               <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-light leading-tight mb-6" style={{ fontFamily: 'Fraunces, Georgia, serif' }}>
                 왜 로컬 가이드여야<br /><em className="not-italic text-[#D97A56]">하는가</em>
               </h2>
-              <p className="text-white/60 leading-relaxed text-sm md:text-base">
+              <p className="text-white/60 leading-relaxed text-sm md:text-base mb-6">
                 호주에서 실제로 살아본 사람만이 알 수 있는 것들이 있어요. 어느 카페가 진짜 맛있는지, 어느 해변이 현지인들이 가는 곳인지. AusRealTour는 그 경험을 연결합니다.
               </p>
+              <Link
+                to="/why-local"
+                className="inline-flex items-center gap-2 text-[#D97A56] hover:text-[#E8845C] text-sm font-medium transition-colors duration-200 group"
+              >
+                왜 로컬 가이드인지 읽어보기
+                <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                { title: '실거주 검증 가이드', desc: '최소 6개월 이상 호주 거주 경험자만 가이드로 등록 가능' },
-                { title: '3단계 검증 프로세스', desc: '서류 심사 → 인터뷰 → 시범 투어 운영 후 최종 승인' },
-                { title: '한국어 소통 100%', desc: '영어 걱정 없이 편안한 한국어로 진행되는 투어' },
-                { title: '안심 환불 정책', desc: '투어 48시간 전까지 전액 환불, 당일 취소도 50% 환불' },
+                { title: '실거주 검증 가이드', desc: '최소 5년 이상 호주 거주 경험자만 가이드로 등록 가능', anchor: 'verified' },
+                { title: '3단계 검증 프로세스', desc: '서류 심사 → 인터뷰 → 시범 투어 운영 후 최종 승인', anchor: 'process' },
+                { title: '한국어 소통 100%', desc: '영어 걱정 없이 편안한 한국어로 진행되는 투어', anchor: 'korean' },
+                { title: '안심 환불 정책', desc: '투어 48시간 전까지 전액 환불, 당일 취소도 50% 환불', anchor: 'refund' },
               ].map((item) => (
-                <div key={item.title} className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/8 transition-colors duration-200">
+                <Link
+                  key={item.title}
+                  to={`/why-local#${item.anchor}`}
+                  className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/12 hover:border-white/20 transition-all duration-200 group text-left"
+                >
                   <div className="w-8 h-8 rounded-full bg-[#C4603A]/20 flex items-center justify-center mb-3">
                     <span className="text-[#C4603A] text-sm font-bold">✓</span>
                   </div>
-                  <h3 className="text-white font-medium text-sm mb-1.5">{item.title}</h3>
-                  <p className="text-white/50 text-xs leading-relaxed">{item.desc}</p>
-                </div>
+                  <h3 className="text-white font-semibold text-sm mb-1.5">{item.title}</h3>
+                  <p className="text-white/50 text-xs leading-relaxed mb-3">{item.desc}</p>
+                  <span className="inline-flex items-center gap-1 text-[#C4603A] text-xs font-medium group-hover:gap-2 transition-all duration-200">
+                    자세히 보기
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </span>
+                </Link>
               ))}
             </div>
           </div>
@@ -315,12 +450,14 @@ export default function HomePage() {
             </div>
             <Link
               to="/tours"
-              className="self-start md:self-auto inline-flex items-center gap-1.5 text-[#1B2D4F]/55 hover:text-[#1B2D4F] text-sm font-medium transition-colors duration-200 group"
+              className="self-start md:self-auto inline-flex items-center gap-2 text-[#1B2D4F]/55 hover:text-[#C4603A] text-sm font-medium transition-colors duration-200 group"
             >
               전체 투어 보기
-              <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              <span className="inline-flex items-center transition-transform duration-300 group-hover:translate-x-1.5">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

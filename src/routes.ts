@@ -6,6 +6,7 @@ import TourDetailPage from './pages/TourDetailPage'
 import AboutPage from './pages/AboutPage'
 import BookingsPage from './pages/BookingsPage'
 import GuideApplyPage from './pages/GuideApplyPage'
+import WhyLocalPage from './pages/WhyLocalPage'
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
       { path: 'about', Component: AboutPage },
       { path: 'bookings', Component: BookingsPage },
       { path: 'guide-apply', Component: GuideApplyPage },
+      { path: 'why-local', Component: WhyLocalPage },
     ],
   },
 ])
