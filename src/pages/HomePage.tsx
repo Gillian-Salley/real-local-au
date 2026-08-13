@@ -358,7 +358,7 @@ export default function HomePage() {
               className="text-white text-center md:text-left text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-light leading-[1.1] tracking-tight mb-5 md:mb-6"
               style={{ fontFamily: 'Fraunces, Georgia, serif' }}
             >
-              직접 살아본 사람만<br />
+              직접 살아본 사람 김기령만<br />
               아는 <em className="not-italic text-[#E8845C]" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4)' }}>호주 여행</em>
             </h1>
 
@@ -370,13 +370,16 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-3 items-center md:items-start md:justify-start justify-center">
               <Link
                 to="/tours"
-                className="w-full sm:w-auto bg-[#C4603A] hover:bg-[#D97A56] active:scale-95 text-white font-medium px-8 py-4 rounded-full transition-all duration-200 text-center text-sm tracking-wide shadow-lg shadow-[#C4603A]/30"
+                className="w-full sm:w-auto bg-[#C4603A] hover:bg-[#D97A56] active:scale-95 text-white font-medium px-8 py-4 rounded-full transition-all duration-200 text-center text-lg tracking-wide shadow-lg shadow-[#C4603A]/30"
               >
                 투어 둘러보기
               </Link>
               <Link
                 to="/about"
-                className="w-full sm:w-auto bg-transparent hover:bg-white/10 active:scale-95 border border-white/40 hover:border-white/60 text-white font-medium px-8 py-4 rounded-full transition-all duration-200 text-center text-sm"
+                className="w-full sm:w-auto bg-transparent hover:bg-white/10 
+                active:scale-95 border border-white/40 hover:border-white/60 
+                text-white font-medium px-8 py-4 rounded-full 
+                transition-all duration-200 text-center text-lg"
               >
                 나의 스토리 보기
               </Link>
