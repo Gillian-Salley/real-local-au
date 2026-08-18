@@ -370,16 +370,13 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-3 items-center md:items-start md:justify-start justify-center">
               <Link
                 to="/tours"
-                className="w-full sm:w-auto bg-[#C4603A] hover:bg-[#D97A56] active:scale-95 text-white font-medium px-8 py-4 rounded-full transition-all duration-200 text-center text-lg tracking-wide shadow-lg shadow-[#C4603A]/30"
+                className="w-full sm:w-auto bg-[#C4603A] hover:bg-[#D97A56] active:scale-95 text-white font-medium px-8 py-4 rounded-full transition-all duration-200 text-center text-sm tracking-wide shadow-lg shadow-[#C4603A]/30"
               >
                 투어 둘러보기
               </Link>
               <Link
                 to="/about"
-                className="w-full sm:w-auto bg-transparent hover:bg-white/10 
-                active:scale-95 border border-white/40 hover:border-white/60 
-                text-white font-medium px-8 py-4 rounded-full 
-                transition-all duration-200 text-center text-lg"
+                className="w-full sm:w-auto bg-transparent hover:bg-white/10 active:scale-95 border border-white/40 hover:border-white/60 text-white font-medium px-8 py-4 rounded-full transition-all duration-200 text-center text-sm"
               >
                 나의 스토리 보기
               </Link>
