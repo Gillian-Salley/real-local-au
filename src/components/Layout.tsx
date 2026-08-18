@@ -5,7 +5,7 @@ import kangarooIcon from '../imports/openmoji_kangaroo.svg'
 
 const NAV_LINKS = [
   { label: '투어 목록', href: '/tours' },
-  { label: '나의 스토리', href: '/about' },
+  { label: '우리의이야기', href: '/about' },
   { label: '예약 확인', href: '/bookings' },
 ]
 

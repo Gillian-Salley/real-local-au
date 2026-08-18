@@ -10,7 +10,7 @@ export const metadata = {
 
 const TIMELINE = [
   {
-    period: '2017 – 2019',
+    period: '2022 – 2024',
     tag: '워킹홀리데이',
     tagColor: '#C4603A',
     title: '호주의 일상 속으로, 2년의 워홀 생활',
@@ -19,7 +19,7 @@ const TIMELINE = [
     imgAlt: '호주 아웃백 일상 풍경',
   },
   {
-    period: '2019 – 2020',
+    period: '2024 – 2025',
     tag: '유학',
     tagColor: '#1B2D4F',
     title: '학업과 커뮤니티 사이, 로컬의 시선을 얻다',
@@ -28,7 +28,7 @@ const TIMELINE = [
     imgAlt: '퍼스 시내와 스완 강 전경',
   },
   {
-    period: '2020',
+    period: '2025',
     tag: '전환점',
     tagColor: '#2a6b4f',
     title: '패키지 투어를 따라온 지인, 그 간극을 목격하다',
@@ -37,7 +37,7 @@ const TIMELINE = [
     imgAlt: '호주 관광지와 로컬 명소의 차이',
   },
   {
-    period: '2022',
+    period: '2026-현재',
     tag: '플랫폼 설립',
     tagColor: '#C4603A',
     title: '나 혼자가 아닌, 검증된 가이드들의 플랫폼으로',
@@ -112,7 +112,7 @@ export default function AboutPage() {
       {/* ── Page header ──────────────────────────────────────────────── */}
       <div className="bg-[#1B2D4F] pt-14 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
-          <p className="text-[#C4603A] text-sm font-medium tracking-widest uppercase mb-5">나의 스토리</p>
+          <p className="text-[#C4603A] text-sm font-medium tracking-widest uppercase mb-5">우리의이야기</p>
           <h1
             className="text-white text-3xl md:text-4xl lg:text-[2.75rem] font-light leading-snug mb-5"
             style={{ fontFamily: 'Fraunces, Georgia, serif' }}
@@ -127,7 +127,7 @@ export default function AboutPage() {
       </div>
 
       {/* ── Timeline ─────────────────────────────────────────────────── */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
         <div className="relative">
           {/* Vertical line */}
           <div className="absolute left-[19px] top-3 bottom-3 w-px bg-[#1B2D4F]/12" />

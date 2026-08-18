@@ -378,7 +378,7 @@ export default function HomePage() {
                 to="/about"
                 className="w-full sm:w-auto bg-transparent hover:bg-white/10 active:scale-95 border border-white/40 hover:border-white/60 text-white font-medium px-8 py-4 rounded-full transition-all duration-200 text-center text-sm"
               >
-                나의 스토리 보기
+                우리의이야기 보기
               </Link>
             </div>
           </div>

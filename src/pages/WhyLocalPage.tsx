@@ -72,7 +72,7 @@ export default function WhyLocalPage() {
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── 01 간극의 발견 ────────────────────────────────────────── */}
         <section id="gap" className="py-16 md:py-20 border-b border-[#1B2D4F]/8">
