@@ -1,0 +1,32 @@
+@theme inline {
+  /* Brand colors */
+  --color-navy: #1B2D4F;
+  --color-navy-dark: #0F1E35;
+  --color-navy-light: #2A4170;
+
+  --color-terracotta: #C4603A;
+  --color-terracotta-light: #D97A56;
+  --color-terracotta-bright: #E8845C;
+
+  --color-sand: #F5EFE6;
+  --color-sand-dark: #EDE3D6;
+  --color-cream: #FDFAF6;
+  --color-ink: #0A1520;
+
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Pretendard', system-ui, sans-serif;
+
+  /* Layout */
+  --container-content: 72rem;
+  --container-reading: 48rem;
+
+  /* Radius */
+  --radius-card: 1rem;
+  --radius-control: 0.75rem;
+  --radius-pill: 9999px;
+
+  /* Shadow */
+  --shadow-card: 0 10px 30px rgb(27 45 79 / 0.08);
+  --shadow-floating: 0 16px 40px rgb(15 30 53 / 0.18);
+}
