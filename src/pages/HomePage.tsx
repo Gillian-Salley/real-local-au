@@ -162,7 +162,7 @@ function ConsultForm() {
 
   return (
     <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#1B2D4F]">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-10 md:mb-12">
           <p className="text-[#C4603A] text-sm font-medium tracking-widest uppercase mb-4">Consult</p>
@@ -326,9 +326,9 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 const TESTIMONIALS = [
-  { name: '박소연', role: '시드니 워홀러', text: '일반 여행사 투어랑 차원이 달라요. 가이드분이 직접 살던 동네 맛집이랑 숨은 명소를 알려줘서 정말 특별했어요.', tour: '하버브리지 & 록스 골목 투어', rating: 5 },
-  { name: '정민우', role: '멜버른 유학생', text: '예약부터 투어 당일까지 소통이 너무 편했어요. 가이드분이 제 영어 실력에 맞게 설명도 해주시고, 호주 생활 꿀팁도 많이 알려주셨습니다.', tour: '그레이트 배리어 리프 스노클링', rating: 5 },
-  { name: '강예나', role: '브리즈번 거주자', text: 'AI 상담으로 내 일정에 맞는 투어를 추천받았는데 완벽하게 맞았어요. 가격 대비 퀄리티가 정말 높고, 가이드분의 진정성이 느껴졌어요.', tour: '울루루 선셋 & 애보리진 문화', rating: 5 },
+  { name: '박*연', role: '시드니 워홀러', text: '일반 여행사 투어랑 차원이 달라요. 가이드분이 직접 살던 동네 맛집이랑 숨은 명소를 알려줘서 정말 특별했어요.', tour: '하버브리지 & 록스 골목 투어', rating: 5 },
+  { name: '정*우', role: '멜버른 유학생', text: '예약부터 투어 당일까지 소통이 너무 편했어요. 가이드분이 제 영어 실력에 맞게 설명도 해주시고, 호주 생활 꿀팁도 많이 알려주셨습니다.', tour: '그레이트 배리어 리프 스노클링', rating: 5 },
+  { name: '강*나', role: '브리즈번 거주자', text: 'AI 상담으로 내 일정에 맞는 투어를 추천받았는데 완벽하게 맞았어요. 가격 대비 퀄리티가 정말 높고, 가이드분의 진정성이 느껴졌어요.', tour: '울루루 선셋 & 애보리진 문화', rating: 5 },
 ]
 
 const HOW_IT_WORKS = [
@@ -358,7 +358,7 @@ export default function HomePage() {
               className="text-white text-center md:text-left text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-light leading-[1.1] tracking-tight mb-5 md:mb-6"
               style={{ fontFamily: 'Fraunces, Georgia, serif' }}
             >
-              직접 살아본 사람 김기령만<br />
+              직접 살아본 사람만<br />
               아는 <em className="not-italic text-[#E8845C]" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4)' }}>호주 여행</em>
             </h1>
 
@@ -447,9 +447,12 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-14">
             <div>
               <p className="text-[#C4603A] text-sm font-medium tracking-widest uppercase mb-3">Best of AusRealTour</p>
-              <h2 className="text-[#1B2D4F] text-3xl md:text-4xl lg:text-5xl font-light leading-tight whitespace-nowrap" style={{ fontFamily: 'Fraunces, Georgia, serif' }}>
-                지금 가장 인기 있는 투어
-              </h2>
+              <h2
+              className="text-[#1B2D4F] text-2xl md:text-3xl lg:text-4xl font-light leading-snug whitespace-nowrap"
+              style={{ fontFamily: 'Fraunces, Georgia, serif' }}
+            >
+              지금 가장 인기 있는 투어
+            </h2>
             </div>
             <Link
               to="/tours"

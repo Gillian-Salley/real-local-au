@@ -43,7 +43,7 @@ export default function Layout() {
 
       {/* ── Navbar ──────────────────────────────────────────────────────── */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-2 group">
               <img src={kangarooIcon} alt="캥거루 아이콘" className="w-8 h-8" />
